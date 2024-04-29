@@ -6,11 +6,7 @@ set(CMAKE_C_STANDARD 11)
 option(linesearch_BUILD_TESTS "Build tests for linesearch library" ON)
 if (${PROJECT_IS_TOP_LEVEL} AND ${linesearch_BUILD_TESTS})
   message(STATUS "Downloading GoogleTest for testing linesearch library")
-  FetchContent_Declare(googletest
-    GIT_REPOSITORY https://github.com/google/googletest
-    GIT_TAG 58d77fa8070e8cec2dc1ed015d66b454c8d78850
-    )
-  FetchContent_MakeAvailable(googletest)
+  find_package(GTest REQUIRED)
   enable_testing()
   include(GoogleTest)
   include(CTest)

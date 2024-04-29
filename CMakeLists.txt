@@ -14,8 +14,8 @@ set(ORGANIZATION_NAME "rexlab")
 # Include needed modules
 list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 include(CMakePrintHelpers)
-include(FetchContent)
 include(AltroCMakeFunctions)
+include(FetchContent)
 include(FindThreads)
 include(GNUInstallDirs)
 
@@ -34,11 +34,7 @@ endif()
 # Enable testing
 option(ALTRO_BUILD_TESTS "Build tests for altro" ON)
 if (${ALTRO_BUILD_TESTS})
-  FetchContent_Declare(googletest
-    GIT_REPOSITORY https://github.com/google/googletest
-    GIT_TAG 58d77fa8070e8cec2dc1ed015d66b454c8d78850
-    )
-  FetchContent_MakeAvailable(googletest)
+  find_package(GTest)
   enable_testing()
   include(GoogleTest)
   include(CTest)
@@ -80,6 +76,9 @@ cmake_print_variables(ALTRO_ARDUINO_LIB_INSTALL_DIR)
 #############################################
 # Dependencies
 #############################################
+find_package(fmt REQUIRED)
+find_package(Eigen3 REQUIRED)
+find_package(nlohmann_json 3.11 REQUIRED)
 add_subdirectory(deps)
 
 #############################################
