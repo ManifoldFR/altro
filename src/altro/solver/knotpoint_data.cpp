@@ -61,6 +61,11 @@ ErrorCodes KnotPointData::SetTimestep(float h) {
   return ErrorCodes::NoError;
 }
 
+auto myreshaped(Vector &v, Eigen::Index rows, Eigen::Index cols) {
+  double *dataPtr = v.data();
+  return Eigen::Map<Matrix>{dataPtr, rows, cols};
+}
+
 ErrorCodes KnotPointData::SetQuadraticCost(int n, int m, const a_float *Qmat, const a_float *Rmat,
                                            const a_float *Hmat, const a_float *q, const a_float *r,
                                            a_float c) {
@@ -75,9 +80,9 @@ ErrorCodes KnotPointData::SetQuadraticCost(int n, int m, const a_float *Qmat, co
   c_ = c;
 
   // Copy to expansion
-  Q_.reshaped(n, n) = Eigen::Map<const Matrix>(Qmat, n, n);
-  R_.reshaped(m, m) = Eigen::Map<const Matrix>(Rmat, m, m);
-  H_.reshaped(m, n) = Eigen::Map<const Matrix>(Hmat, m, n);
+  myreshaped(Q_, n, n) = Eigen::Map<const Matrix>(Qmat, n, n);
+  myreshaped(R_, m, m) = Eigen::Map<const Matrix>(Rmat, m, m);
+  H_ = Eigen::Map<const Matrix>(Hmat, m, n);
 
   cost_fun_is_set_ = true;
   cost_fun_type_ = CostFunType::Quadratic;
@@ -623,10 +628,10 @@ a_float KnotPointData::CalcOriginalCost() {
       break;
     }
     case CostFunType::Quadratic: {
-      J = 0.5 * x_.transpose() * Q_.reshaped(n, n) * x_;
+      J = 0.5 * x_.transpose() * myreshaped(Q_, n, n) * x_;
       J += q_.dot(x_);
       if (!IsTerminalKnotPoint()) {
-        J += 0.5 * u_.transpose() * R_.reshaped(m, m) * u_;
+        J += 0.5 * u_.transpose() * myreshaped(R_, m, m) * u_;
         J += r_.dot(u_);
         J += u_.dot(H_ * x_);
       }
@@ -656,11 +661,11 @@ void KnotPointData::CalcOriginalCostGradient() {
       break;
     }
     case CostFunType::Quadratic: {
-      lx_ = Q_.reshaped(n, n) * x_;
+      lx_ = myreshaped(Q_, n, n) * x_;
       lx_ += q_;
 
       if (!IsTerminalKnotPoint()) {
-        lu_ = R_.reshaped(m, m) * u_;
+        lu_ = myreshaped(R_, m, m) * u_;
         lu_ += r_;
         lu_ += H_ * x_;
         lx_ += H_.transpose() * u_;
@@ -689,9 +694,9 @@ void KnotPointData::CalcOriginalCostHessian() {
       break;
     }
     case CostFunType::Quadratic: {
-      lxx_ = Q_.reshaped(n, n);
+      lxx_ = myreshaped(Q_, n, n);
       if (!IsTerminalKnotPoint()) {
-        luu_ = R_.reshaped(m, m);
+        luu_ = myreshaped(R_, m, m);
         lux_ = H_;
       }
       break;
