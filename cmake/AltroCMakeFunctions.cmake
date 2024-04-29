@@ -3,7 +3,7 @@ function(altro_unit_test testname)
      add_executable(${testname}_test ${testname}_test.cpp)
       target_link_libraries(${testname}_test
         PRIVATE
-        gtest_main
+        GTest::gtest_main
         altro::impl
         fmt::fmt
         Eigen3::Eigen
