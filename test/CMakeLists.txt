@@ -4,7 +4,7 @@ add_library(altro_test_utils
 )
 target_link_libraries(altro_test_utils
   PUBLIC
-  gtest_main
+  GTest::gtest_main
   altro::altro
   fmt::fmt
   Eigen3::Eigen
@@ -28,7 +28,7 @@ add_executable(altro_api
 )
 target_link_libraries(altro_api
   PRIVATE
-  gtest_main
+  GTest::gtest_main
   altro::altro
   fmt::fmt
 )
@@ -39,7 +39,7 @@ add_executable(double_integrator_test
 )
 target_link_libraries(double_integrator_test
   PRIVATE
-  gtest_main
+  GTest::gtest_main
   altro::altro
   altro::impl
   fmt::fmt
@@ -51,7 +51,7 @@ add_executable(pendulum_test
 )
 target_link_libraries(pendulum_test
   PRIVATE
-  gtest_main
+  GTest::gtest_main
   altro::altro
   fmt::fmt
   Eigen3::Eigen
@@ -63,7 +63,7 @@ add_executable(bicycle_test
 )
 target_link_libraries(bicycle_test
   PRIVATE
-  gtest_main
+  GTest::gtest_main
   altro::altro
   altro::test_utils
   fmt::fmt

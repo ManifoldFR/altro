@@ -3,7 +3,7 @@ add_executable(altrocpp_interface_test
 )
 target_link_libraries(altrocpp_interface_test
   PRIVATE
-  gtest_main
+  GTest::gtest_main
   fmt::fmt
   Eigen3::Eigen
   altrocpp::interface

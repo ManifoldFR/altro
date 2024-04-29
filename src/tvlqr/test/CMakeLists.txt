@@ -4,7 +4,7 @@ add_executable(tvlqr_test
 target_link_libraries(tvlqr_test
   PRIVATE
   altro::tvlqr
-  gtest_main
+  GTest::gtest_main
   Eigen3::Eigen
   fmt::fmt
   altro::test_utils

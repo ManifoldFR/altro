@@ -3,6 +3,6 @@ add_executable(linesearch_tests
 )
 target_link_libraries(linesearch_tests
   PRIVATE
-  gtest_main
+  GTest::gtest_main
   linesearch::linesearch
 )
