@@ -88,7 +88,7 @@ ErrorCodes ALTROSolver::SetCostFunction(CostFunction cost_function, CostGradient
   ErrorCodes err = CheckKnotPointIndices(k_start, k_stop, LastIndexMode::Inclusive);
   if (err != ErrorCodes::NoError) return err;
 
-  for (int k = k_stop; k < k_stop; ++k) {
+  for (int k = k_start; k < k_stop; ++k) {
     solver_->data_[k].SetCostFunction(cost_function, cost_gradient, cost_hessian);
   }
 
@@ -102,7 +102,7 @@ ErrorCodes ALTROSolver::SetDiagonalCost(int num_states, int num_inputs, const a_
   err = AssertDimensionsAreSet(k_start, k_stop, "Cannot set the cost function");
   if (err != ErrorCodes::NoError) return err;
 
-  for (int k = k_stop; k < k_stop; ++k) {
+  for (int k = k_start; k < k_stop; ++k) {
     int n = this->GetStateDim(k);
     int m = this->GetInputDim(k);
     if (n != num_states) return ErrorCodes::DimensionMismatch;
