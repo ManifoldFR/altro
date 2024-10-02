@@ -8,8 +8,6 @@
 #include <cmath>
 #include <iostream>
 
-#include "linesearch.h"
-
 extern "C" {
 #include "cubicspline.h"
 }
