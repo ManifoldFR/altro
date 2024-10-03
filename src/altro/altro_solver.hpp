@@ -20,12 +20,12 @@ class SolverImpl;  // Forward-declare the implementation. Note this is public, b
 
 class ALTROSolver {
  public:
-  explicit ALTROSolver(int horizon_length);          // Constructor
-  ALTROSolver(const ALTROSolver& other);             // Copy constructor
-  ALTROSolver(ALTROSolver&& other);                  // Move constructor
-  ALTROSolver& operator=(const ALTROSolver& other);  // Copy assignment
-  ALTROSolver& operator=(ALTROSolver&& other);       // Move assignment
-  ~ALTROSolver();                                    // Destructor
+  explicit ALTROSolver(int horizon_length);                   // Constructor
+  ALTROSolver(ALTROSolver&& other);                           // Move constructor
+  ALTROSolver(const ALTROSolver& other) = delete;             // Copy constructor
+  ALTROSolver& operator=(const ALTROSolver& other) = delete;  // Copy assignment
+  ALTROSolver& operator=(ALTROSolver&& other);                // Move assignment
+  ~ALTROSolver();                                             // Destructor
 
   /**********************************************
    * Problem definition

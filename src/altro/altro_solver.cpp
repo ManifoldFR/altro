@@ -18,7 +18,8 @@ altro::ALTROSolver::ALTROSolver(int horizon_length)
 
 ALTROSolver::ALTROSolver(ALTROSolver &&other) = default;
 ALTROSolver &ALTROSolver::operator=(ALTROSolver &&other) = default;
-altro::ALTROSolver::~ALTROSolver() = default;
+ALTROSolver::~ALTROSolver() = default;
+
 
 /////////////////////////////////////////////
 // Setters
