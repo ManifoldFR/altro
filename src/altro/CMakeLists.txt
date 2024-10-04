@@ -3,7 +3,6 @@ add_subdirectory(solver)
 add_library(altro_altro2
 
   altro.hpp
-  altro.cpp
 
   altro_solver.hpp
   altro_solver.cpp
