@@ -399,6 +399,7 @@ class ALTROSolver {
   int GetIterations() const;
   a_float GetSolveTimeMs() const;
   a_float GetPrimalFeasibility() const;
+  a_float GetStationarity() const;
   a_float GetFinalObjective() const;
   a_float CalcCost();
 

@@ -319,6 +319,8 @@ a_float ALTROSolver::GetSolveTimeMs() const { return solver_->stats.solve_time.c
 
 a_float ALTROSolver::GetPrimalFeasibility() const { return solver_->stats.primal_feasibility; };
 
+a_float ALTROSolver::GetStationarity() const { return solver_->stats.stationarity; };
+
 a_float ALTROSolver::GetFinalObjective() const { return solver_->stats.objective_value; }
 
 ErrorCodes ALTROSolver::GetState(a_float *x, int k) const {
