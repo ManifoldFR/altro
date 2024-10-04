@@ -458,6 +458,8 @@ ErrorCodes SolverImpl::Solve() {
     // TODO: Add full nonlinear stationarity?
     a_float stationarity = Stationarity();
     a_float feasibility = Feasibility();
+    stats.primal_feasibility = feasibility;
+    stats.stationarity = stationarity;
     CopyTrajectory();
 
     a_float cost_decrease = phi0_ - phi_;
