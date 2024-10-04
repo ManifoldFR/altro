@@ -454,7 +454,7 @@ ErrorCodes SolverImpl::Solve() {
     }
 
     // Calculate convergence criteria
-    // TODO: Add complimentarity?
+    // TODO: Add complementarity?
     // TODO: Add full nonlinear stationarity?
     a_float stationarity = Stationarity();
     a_float feasibility = Feasibility();

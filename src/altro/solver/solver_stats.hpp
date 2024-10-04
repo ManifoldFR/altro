@@ -21,7 +21,7 @@ struct AltroStats {
   double objective_value;
   double stationarity;
   double primal_feasibility;
-  double complimentarity;
+  double complementarity;
 };
 
 }  // namespace altro
