@@ -15,8 +15,6 @@ endif()
 add_library(linesearch_linesearch
   linesearch.cpp
   linesearch.hpp
-#  linesearch.h
-#  linesearch.c
   cubicspline.c
   cubicspline.h
 )
