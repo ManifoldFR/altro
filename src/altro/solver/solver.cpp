@@ -417,6 +417,8 @@ ErrorCodes SolverImpl::Solve() {
   ls_.use_backtracking_linesearch = opts.use_backtracking_linesearch;
   rho_ = opts.penalty_initial;
 
+  using std::chrono::steady_clock;
+  auto t_start = steady_clock::now();
   // Initial rollout
   // TODO: make this a TVLQR rollout with affine terms enabled
   OpenLoopRollout();
@@ -509,6 +511,7 @@ ErrorCodes SolverImpl::Solve() {
   if (opts.verbose > Verbosity::Silent) {
     fmt::print("ALTRO SOLVE FINISHED!\n");
   }
+  stats.solve_time = steady_clock::now() - t_start;
   return ErrorCodes::NoError;
 }
 
