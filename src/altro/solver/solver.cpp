@@ -245,7 +245,11 @@ ErrorCodes SolverImpl::ForwardPass(a_float* alpha) {
   }
 
   ls_.SetVerbose(opts.verbose == Verbosity::LineSearch);
-  ls_.try_cubic_first = true;
+  // force pure backtracking mode.
+  // otherwise, algo attempts one cubic linesearch step before
+  // doing backtracking.
+  // and the pure cubic linesearch doesn't seem to work good.
+  ls_.try_cubic_first = false;
   *alpha = ls_.Run(phi, 1.0, phi0_, dphi0_);
   ls_.GetFinalMeritValues(&phi_, &dphi_);
   auto res = ls_.GetStatus();
