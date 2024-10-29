@@ -230,6 +230,15 @@ a_float SolverImpl::Feasibility() {
   return viol;
 }
 
+a_float SolverImpl::Complementarity() {
+  a_float viol = 0.;
+  for (int k = 0; k <= horizon_length_; k++) {
+    KnotPointData& kp = data_[k];
+    viol = std::max(viol, kp.CalcComplementarity());
+  }
+  return viol;
+}
+
 /////////////////////////////////////////////
 // Forward Pass
 /////////////////////////////////////////////
@@ -464,13 +473,16 @@ ErrorCodes SolverImpl::Solve() {
     // TODO: Add full nonlinear stationarity?
     a_float stationarity = Stationarity();
     a_float feasibility = Feasibility();
+    a_float complementarity = Complementarity();
     stats.primal_feasibility = feasibility;
     stats.stationarity = stationarity;
+    stats.complementarity = complementarity;
     CopyTrajectory();
 
     a_float cost_decrease = phi0_ - phi_;
     if (std::abs(stationarity) < opts.tol_stationarity &&
-        feasibility < opts.tol_primal_feasibility) {
+        feasibility < opts.tol_primal_feasibility
+        && complementarity < opts.tol_complementarity) {
       is_converged = true;
       stop_iterating = true;
       stats.status = SolveStatus::Success;

@@ -77,6 +77,7 @@ class KnotPointData {
   ErrorCodes CalcConstraintCostHessians();
   ErrorCodes DualUpdate();
   a_float CalcViolations();
+  a_float CalcComplementarity();
   void PenaltyUpdate(a_float scaling, a_float penalty_max);
 
   // Getters

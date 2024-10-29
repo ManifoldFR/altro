@@ -41,6 +41,7 @@ class SolverImpl {
   ErrorCodes LinearRollout();
   a_float Stationarity();
   a_float Feasibility();
+  a_float Complementarity();
 
   ErrorCodes CalcConstraints();
   ErrorCodes CalcConstraintJacobians();

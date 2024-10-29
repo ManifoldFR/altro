@@ -505,6 +505,19 @@ a_float KnotPointData::CalcViolations() {
   return viol;
 }
 
+a_float KnotPointData::CalcComplementarity() {
+  // Assumes the constraints have already been calculated
+  a_float viol = 0.0;
+  int num_con = NumConstraints();
+  // TODO: fix malloc here
+  Matrix prod;
+  for (int j = 0; j < num_con; ++j) {
+    prod = z_[j].cwiseProduct(constraint_val_[j]);
+    viol = prod.lpNorm<Eigen::Infinity>();
+  }
+  return viol;
+}
+
 ErrorCodes KnotPointData::DualUpdate() {
   int ncons = NumConstraints();
   for (int j = 0; j < ncons; ++j) {
